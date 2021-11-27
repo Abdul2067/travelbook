@@ -8,3 +8,6 @@ def home(request):
 
 def about(request):
   return render(request, "about.html")
+
+def travels_index(request):
+  return render(request, "travels/index.html", {"travels" : travels})
