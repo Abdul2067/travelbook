@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<section class="logo-container">
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="images/travel-new-york.svg" class="d-block w-100" alt="New York">
+    </div>
+    <div class="carousel-item">
+      <img src="images/travel-japan.svg" class="d-block w-100" alt="Japan">
+    </div>
+    <div class="carousel-item">
+      <img src="images/travel-italy.svg" class="d-block w-100" alt="Italy">
+    </div>
+    <div class="carousel-item">
+      <img src="images/travel-palestine.svg" class="d-block w-100" alt="Palestine">
+    </div>
+  </div>
+</div>
+</section>
+
+{% endblock %}
