@@ -8,22 +8,31 @@
 {% block content %}
 
 <section class="logo-container">
-<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="images/travel-new-york.svg" class="d-block w-100" alt="New York">
+    <div class="travel-container active">
+      <img src=" {% static 'images/travel-new-york.svg' %}" class="d-block w-100" alt="New York">
     </div>
-    <div class="carousel-item">
-      <img src="images/travel-japan.svg" class="d-block w-100" alt="Japan">
+    <div class="travel-container">
+      <img src="{% static 'images/travel-italy.svg' %}" class="d-block w-100" alt="Italy">
     </div>
-    <div class="carousel-item">
-      <img src="images/travel-italy.svg" class="d-block w-100" alt="Italy">
+    <div class="travel-container">
+      <img src="{% static 'images/travel-japan.svg' %}" class="d-block w-100" alt="Japan">
     </div>
-    <div class="carousel-item">
-      <img src="images/travel-palestine.svg" class="d-block w-100" alt="Palestine">
+    <div class="travel-container">
+      <img src="{% static 'images/travel-palestine.svg' %}" class="d-block w-100" alt="Palestine">
     </div>
   </div>
 </div>
+</section>
+<section>
+  <form action="{% url 'home' %}" method="post" class="login">
+    <h1>Login</h1>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit" class="btn submit">Login</button>
+  </form>
 </section>
 
 {% endblock %}

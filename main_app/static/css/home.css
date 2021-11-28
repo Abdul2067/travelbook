@@ -19,11 +19,7 @@ main > section {
   display: none;
 }
 
-.logo-container {
-  max-width: 375px;
-}
-
-.cat-container {
+.travel-container {
   width: 80%;
 }
 
