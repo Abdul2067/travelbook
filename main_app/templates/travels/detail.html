@@ -18,10 +18,18 @@
       alt="The Travel Book"
     >
   </div>
-  <div class="cat-details">
+  <div class="travel-details">
     <h1>{{ travel.city }}, {{ travel.country }}</h1>
-    <h2>Travel on {{ travel.date }}.</h2>
+    {% if travel.date > timezone.now %}
+    <h2>Traveling on {{ travel.date }}.</h2>
+    {% else %}
+    <h2>Traveled on {{ travel.date }}.</h2>
+    {% endif %}
     <p>{{ travel.description }}</p>
+    <div class="travel-actions">
+      <a href="{% url 'travels_update' travel.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'travels_delete' travel.id %}" class="btn danger">Delete</a>
+    </div>
   </div>
 </section>
 
