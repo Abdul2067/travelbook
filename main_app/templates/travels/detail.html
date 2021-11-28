@@ -5,22 +5,22 @@
 <link 
   rel="stylesheet" 
   type="text/css" 
-  href="{% static 'css/cat-detail.css' %}"
+  href="{% static 'css/travel-detail.css' %}"
 />
 {% endblock %}
 
 {% block content %}
 
-<section class="cat-container">
-  <div class="cat-img">
+<section class="travel-container">
+  <div class="travel-img">
     <img 
-      src="{% static 'images/sk8r-boi-cat.svg' %}" 
-      alt="A skater boy cat"
+      src="{% static 'images/travelbook.svg' %}" 
+      alt="The Travel Book"
     >
   </div>
   <div class="cat-details">
     <h1>{{ travel.city }}, {{ travel.country }}</h1>
-      <h2>A {{ travel.date }} kitten.</h2>
+    <h2>Travel on {{ travel.date }}.</h2>
     <p>{{ travel.description }}</p>
   </div>
 </section>
