@@ -14,3 +14,7 @@ def about(request):
 def travels_index(request):
   travels = Travel.objects.all()
   return render(request, "travels/index.html", {"travels" : travels})
+
+def travels_detail(request, travel_id):
+  travel = Travel.objects.get(id=travel_id)
+  return render(request, "travels/detail.html", { "travel" : travel })
