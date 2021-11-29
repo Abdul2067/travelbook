@@ -4,6 +4,8 @@ from django.db.models import fields
 from django.http import request
 from django.shortcuts import redirect, render
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from . models import Travel
 from .forms import ActivityForm
@@ -16,16 +18,18 @@ class Home(LoginView):
 def about(request):
   return render(request, "about.html")
 
+@login_required
 def travels_index(request):
   travels = Travel.objects.filter(user=request.user)
   return render(request, "travels/index.html", {"travels" : travels})
 
+@login_required
 def travels_detail(request, travel_id):
   travel = Travel.objects.get(id=travel_id)
   activity_form = ActivityForm()
   return render(request, "travels/detail.html", { "travel" : travel, "activity_form" : activity_form })
 
-class TravelCreate(CreateView):
+class TravelCreate(LoginRequiredMixin ,CreateView):
   model = Travel
   fields = ["city", "country", "description", "date"]
 
@@ -33,14 +37,15 @@ class TravelCreate(CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
-class TravelUpdate(UpdateView):
+class TravelUpdate(LoginRequiredMixin ,UpdateView):
   model = Travel
   fields = ["city", "country", "description", "date"]
 
-class TravelDelete(DeleteView):
+class TravelDelete(LoginRequiredMixin ,DeleteView):
   model = Travel
   success_url = "/travels/"
 
+@login_required
 def add_activity(request, travel_id):
   form = ActivityForm(request.POST)
   if form.is_valid():
