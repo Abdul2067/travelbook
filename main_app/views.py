@@ -1,3 +1,5 @@
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 from django.db.models import fields
 from django.http import request
 from django.shortcuts import redirect, render
@@ -25,7 +27,11 @@ def travels_detail(request, travel_id):
 
 class TravelCreate(CreateView):
   model = Travel
-  fields = "__all__"
+  fields = ["city", "country", "description", "date"]
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
 
 class TravelUpdate(UpdateView):
   model = Travel
@@ -42,3 +48,17 @@ def add_activity(request, travel_id):
     new_activity.travel_id = travel_id
     new_activity.save()
   return redirect("travels_detail", travel_id=travel_id)
+
+def signup(request):
+  error_message = ""
+  if request.method == "POST":
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      user = form.save()
+      login(request, user)
+      return redirect("travels_index")
+    else:
+      error_message = "Invalid signup!! Please try again."
+  form = UserCreationForm()
+  context = {"form" : form, "error_message" : error_message}
+  return render(request, "signup.html", context)
