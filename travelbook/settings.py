@@ -1,3 +1,8 @@
+import environ
+env = environ.Env(
+    environ.Env.read_env()
+)
+
 """
 Django settings for travelbook project.
 
@@ -20,10 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)#nz7)4^rn#+7hfgb-_irt(lx@e%7-&ng)pzadg^)=t&1s%hjp'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG") == True
+
+DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ALLOWED_HOSTS = []
 
@@ -129,3 +136,6 @@ LOGININ_URL = "home"
 LOGIN_REDIRECT_URL = "travels_index"
 
 LOGOUT_REDIRECT_URL = "home"
+
+import django_heroku
+django_heroku.settings(locals())
