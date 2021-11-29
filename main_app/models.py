@@ -5,11 +5,11 @@ from django.db.models.aggregates import Max
 from django.urls import reverse
 
 RATING = (
-  ("1", "5"),
-  ("2", "4"),
+  ("5", "5"),
+  ("4", "4"),
   ("3", "3"),
-  ("4", "2"),
-  ("5", "1")
+  ("2", "2"),
+  ("1", "1")
 )
 # Create your models here.
 class Travel(models.Model):

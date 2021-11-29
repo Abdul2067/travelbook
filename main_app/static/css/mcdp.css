@@ -1,4 +1,3 @@
-```css
 .mc-display__day {
   font-size:clamp(1.6rem, 8vw, 2rem);
 }
@@ -45,4 +44,3 @@
 .mc-picker__footer {
   padding: 1.6rem 0;
 }
-```

@@ -1,6 +1,6 @@
 from django.db.models import fields
 from django.http import request
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from . models import Travel
@@ -37,3 +37,8 @@ class TravelDelete(DeleteView):
 
 def add_activity(request, travel_id):
   form = ActivityForm(request.POST)
+  if form.is_valid():
+    new_activity = form.save(commit=False)
+    new_activity.travel_id = travel_id
+    new_activity.save()
+  return redirect("travels_detail", travel_id=travel_id)
