@@ -17,7 +17,7 @@ def about(request):
   return render(request, "about.html")
 
 def travels_index(request):
-  travels = Travel.objects.all()
+  travels = Travel.objects.filter(user=request.user)
   return render(request, "travels/index.html", {"travels" : travels})
 
 def travels_detail(request, travel_id):
