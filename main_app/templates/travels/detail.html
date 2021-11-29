@@ -32,5 +32,30 @@
     </div>
   </div>
 </section>
+<div class="activities-container">
+  <section class="activities">
+    <div class="subsection-title">
+      <h2>Excursions/Activities</h2>
+      <img 
+        src="{% static 'images/activity.svg' %}" 
+        alt="Surfer"
+      />
+    </div>
+    <table>
+      <thead>
+        <tr><th>Activity</th><th>Rating</th></tr>
+      </thead>
+      <tbody>
+        {% for activity in travel.activity_set.all %}
+          <tr>
+            <td>{{activity.activity}}</td>
+            <td>{{activity.rating}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+
 
 {% endblock %}
