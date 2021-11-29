@@ -41,35 +41,39 @@
         alt="Surfer"
       />
     </div>
-      <h3>Add a Excursion/Activity</h3>
-      <form
-        action={% url 'add_activity' travel.id %}
-        method="POST"
-        class="subsection-content"
-      >
+    <h3>Add a Excursion/Activity</h3>
+    <form
+      action={% url 'add_activity' travel.id %}
+      method="POST"
+      class="subsection-content"
+    >
       {% csrf_token %}
       {{ activity_form.as_p }}
       <button 
         type="submit" 
         class="btn submit"
       >
-      Add Excursion/Activity
+        Add Excursion/Activity
       </button>
-      </form>
-      <h3>All Excursions/Activities</h3>
-    <table>
-      <thead>
-        <tr><th>Activity</th><th>Rating</th></tr>
-      </thead>
-      <tbody>
-        {% for activity in travel.activity_set.all %}
-          <tr>
-            <td>{{activity.activity}}</td>
-            <td>{{activity.rating}}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    </form>
+    <h3>All Excursions/Activities</h3>
+    {% if travel.activity_set.all.count %}
+      <table>
+        <thead>
+          <tr><th>Activity</th><th>Rating</th></tr>
+        </thead>
+        <tbody>
+          {% for activity in travel.activity_set.all %}
+            <tr>
+              <td>{{activity.activity}}</td>
+              <td>{{activity.rating}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="subsection-content">Nothing added yet</p>
+    {% endif %}
   </section>
 </div>
 {% endblock %}
