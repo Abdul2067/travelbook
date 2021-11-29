@@ -34,3 +34,6 @@ class TravelUpdate(UpdateView):
 class TravelDelete(DeleteView):
   model = Travel
   success_url = "/travels/"
+
+def add_activity(request, travel_id):
+  form = ActivityForm(request.POST)

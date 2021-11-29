@@ -42,7 +42,8 @@
       />
     </div>
       <h3>Add a Excursion/Activity</h3>
-      <form 
+      <form
+        action={% url 'add_activity' travel.id %}
         method="POST"
         class="subsection-content"
       >
