@@ -41,6 +41,21 @@
         alt="Surfer"
       />
     </div>
+      <h3>Add a Excursion/Activity</h3>
+      <form 
+        method="POST"
+        class="subsection-content"
+      >
+      {% csrf_token %}
+      {{ activity_form.as_p }}
+      <button 
+        type="submit" 
+        class="btn submit"
+      >
+      Add Excursion/Activity
+      </button>
+      </form>
+      <h3>All Excursions/Activities</h3>
     <table>
       <thead>
         <tr><th>Activity</th><th>Rating</th></tr>
@@ -56,6 +71,4 @@
     </table>
   </section>
 </div>
-
-
 {% endblock %}

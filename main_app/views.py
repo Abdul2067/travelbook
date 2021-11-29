@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from . models import Travel
+from .forms import ActivityForm
 
 # Create your views here.
 
@@ -19,7 +20,8 @@ def travels_index(request):
 
 def travels_detail(request, travel_id):
   travel = Travel.objects.get(id=travel_id)
-  return render(request, "travels/detail.html", { "travel" : travel })
+  activity_form = ActivityForm()
+  return render(request, "travels/detail.html", { "travel" : travel, "activity_form" : activity_form })
 
 class TravelCreate(CreateView):
   model = Travel

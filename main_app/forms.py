@@ -1,0 +1,8 @@
+from django.db import models
+from django.forms import ModelForm, fields
+from .models import Activity
+
+class ActivityForm(ModelForm):
+  class Meta:
+    model = Activity
+    fields = ["activity", "rating"]
