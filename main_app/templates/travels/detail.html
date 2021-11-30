@@ -13,10 +13,18 @@
 
 <section class="travel-container">
   <div class="travel-img">
+    {% if travel.photo.url %}
     <img 
-      src="{% static 'images/travelbook.svg' %}" 
-      alt="The Travel Book"
+      src="{{travel.photo.url}}" 
+      alt="A photo of travel to {{travel.city}}"
+      class="usr-img"
     >
+    {% else %}
+    <img 
+    src="{% static 'images/travelbook.svg' %}" 
+    alt="The Travel Book"
+    >
+    {% endif %}
   </div>
   <div class="travel-details">
     <h1>{{ travel.city }}, {{ travel.country }}</h1>
@@ -30,6 +38,20 @@
       <a href="{% url 'travels_update' travel.id %}" class="btn warn">Edit</a>
       <a href="{% url 'travels_delete' travel.id %}" class="btn danger">Delete</a>
     </div>
+    <h3>Change the {{ travel.city }}, {{travel.country}} photo</h3>
+    <p id="file-name"></p>
+    <form 
+      action="{% url 'add_photo' travel.id %}"
+      enctype="multipart/form-data"
+      method="POST"
+    >
+      {% csrf_token %}
+      <label class="btn secondary">
+        Choose photo
+        <input type="file" name="photo-file" id="file-input">
+      </label>
+      <button type="submit" class="btn submit">Upload Photo</button>
+    </form>
   </div>
 </section>
 <div class="activities-container">
