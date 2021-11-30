@@ -12,4 +12,5 @@ urlpatterns = [
   path("travels/<int:pk>/delete/", views.TravelDelete.as_view(), name="travels_delete"),
   path("cats/<int:travel_id>/add_activity/", views.add_activity, name="add_activity"),
   path("accounts/signup", views.signup, name="signup"),
+  path("travels/<int:travel_id>/add_photo", views.add_photo, name="add_photo")
 ]

@@ -7,8 +7,13 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from . models import Travel
+from . models import Travel, Photo
 from .forms import ActivityForm
+import uuid
+import boto3
+
+S3_BASE_URL = "https://s3.us-east-2.amazonaws.com/"
+BUCKET = "travelbookaws"
 
 # Create your views here.
 
@@ -53,6 +58,23 @@ def add_activity(request, travel_id):
     new_activity.travel_id = travel_id
     new_activity.save()
   return redirect("travels_detail", travel_id=travel_id)
+
+def add_photo(request, travel_id):
+  photo_file = request.FILES.get("photo-file", None)
+  if photo_file:
+    s3 = boto3.client("s3")
+    key = uuid.uuid4().hex + photo_file.name[photo_file.name.rfind("."):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = Photo(url=url, travel_id=travel_id)
+      travel_photo = Photo.objects.filter(travel_id=travel_id)
+      if travel_photo.first():
+        travel_photo.first().delete()
+      photo.save()
+    except Exception as err:
+      print('An error occurred uploading file to S3: %s' % err)
+  return redirect('travels_detail', travel_id=travel_id)
 
 def signup(request):
   error_message = ""
