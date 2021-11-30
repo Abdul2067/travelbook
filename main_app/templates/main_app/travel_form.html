@@ -18,7 +18,8 @@
 <link 
   rel="stylesheet" 
   type="text/css" 
-  href="{% static 'css/form.css' %}"/>
+  href="{% static 'css/form.css' %}"
+/>
 {% endblock %}
 
 {% block content %}
@@ -31,7 +32,7 @@
   {% endif %}
   <img src="{% static 'images/add-travel.svg' %}" alt="Add Travel"/>
 </div>
-<form action="" method="post" class="form-container">
+<form action="" method="post" class="form-container" autocomplete="off">
   {% csrf_token %}
   <table>
     {{ form.as_table }}
