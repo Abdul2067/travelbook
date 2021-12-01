@@ -18,10 +18,18 @@
       <a href="{% url 'travels_detail' travel.id %}">
         <div class="card-content">
           <div class="card-img-container">
+            {% if travel.photo.url %}
             <img 
-              src="{% static 'images/travelbook.svg' %}" 
-              alt="Travel Book Main"
+              src="{{travel.photo.url}}" 
+              alt="A photo of travel to {{travel.city}}"
+              class="usr-img"
             >
+            {% else %}
+            <img 
+            src="{% static 'images/travelbook.svg' %}" 
+            alt="The Travel Book"
+            >
+            {% endif %}
           </div>
           <h2 class="card-title">{{ travel.city }}, {{ travel.country }}</h2>
           <p>{{ travel.date }}</p>

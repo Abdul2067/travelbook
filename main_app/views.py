@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from . models import Travel, Photo
 from .forms import ActivityForm
+from datetime import date
 import uuid
 import boto3
 
@@ -32,7 +33,9 @@ def travels_index(request):
 def travels_detail(request, travel_id):
   travel = Travel.objects.get(id=travel_id)
   activity_form = ActivityForm()
-  return render(request, "travels/detail.html", { "travel" : travel, "activity_form" : activity_form })
+  is_past_tense = travel.date < date.today()
+  print("is_past_tense", is_past_tense)
+  return render(request, "travels/detail.html", { "travel" : travel, "activity_form" : activity_form, "is_past_tense" : is_past_tense})
 
 class TravelCreate(LoginRequiredMixin ,CreateView):
   model = Travel
@@ -59,6 +62,7 @@ def add_activity(request, travel_id):
     new_activity.save()
   return redirect("travels_detail", travel_id=travel_id)
 
+@login_required
 def add_photo(request, travel_id):
   photo_file = request.FILES.get("photo-file", None)
   if photo_file:

@@ -21,6 +21,9 @@ crossorigin="anonymous"/>
 {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
+<h1>Welcome to Travel Book</h1>
+{% endif %}
 
 <section class="logo-container">
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
@@ -36,6 +39,9 @@ crossorigin="anonymous"/>
     </div>
     <div class="travel-container carousel-item">
       <img src="{% static 'images/travel-palestine.svg' %}" class="d-block w-100" alt="Palestine">
+    </div>
+    <div class="travel-container carousel-item">
+      <img src="{% static 'images/travel-copenhagen.svg' %}" class="d-block w-100" alt="Copenhagen">
     </div>
   </div>
 </div>
